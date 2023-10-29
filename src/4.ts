@@ -13,7 +13,7 @@ class Person {
   constructor(key: Key) {
     this.key = key;
   }
-  getKey() {
+  getKey(): Key {
     return this.key;
   }
 }
@@ -21,14 +21,15 @@ class Person {
 abstract class House {
   public door: boolean = false;
   public key: Key;
+  public tenants: Person[] = []
   constructor(key: Key) {
     this.key = key;
   }
   abstract openDoor(key: Key): void;
   comeIn(person: Person) {
     if (this.door) {
-      const tenants: Person[] = [];
-      tenants.push(person);
+      
+      this.tenants.push(person);
     }
   }
 }
@@ -36,7 +37,7 @@ abstract class House {
 class MyHouse extends House {
   openDoor(key: Key): void {
     if (key.getSignature() === this.key.getSignature()) {
-      this.door === true;
+      this.door = true;
     }
   }
 }
